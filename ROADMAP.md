@@ -1,0 +1,22 @@
+# Roadmap
+
+- [x] pnpm monorepo with shared TypeScript, ESLint and Prettier tooling
+- [ ] NestJS API skeleton
+- [ ] Prisma schema (users, accounts, categories, transactions, budgets), migrations and seed
+- [ ] Authentication with JWT access/refresh tokens and bcrypt
+- [ ] Accounts CRUD
+- [ ] Categories CRUD
+- [ ] Transactions with filters and pagination
+- [ ] Budgets with limit alerts
+- [ ] Reports: monthly summary and spending by category
+- [ ] OpenAPI (Swagger) documentation
+- [ ] Unit and end-to-end tests
+- [ ] Web: scaffold and sign-in/sign-up pages
+- [ ] Web: dashboard with charts
+- [ ] Web: transactions and budgets pages
+- [ ] Mobile (Expo): scaffold and sign-in
+- [ ] Mobile: transaction list and creation
+- [ ] CSV bank statement import
+- [ ] docker-compose (API + PostgreSQL)
+- [ ] CI
+- [ ] Final README

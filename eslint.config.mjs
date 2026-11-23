@@ -1,0 +1,12 @@
+import js from "@eslint/js";
+import prettier from "eslint-config-prettier/flat";
+import { defineConfig, globalIgnores } from "eslint/config";
+import tseslint from "typescript-eslint";
+
+/** Shared ESLint config for TypeScript packages (apps may extend it). */
+export default defineConfig([
+  globalIgnores(["**/dist/**", "**/coverage/**", "**/.next/**", "**/.expo/**"]),
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  prettier,
+]);
