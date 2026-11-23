@@ -2,12 +2,23 @@ import { validateEnv } from "./config.js";
 
 describe("validateEnv", () => {
   it("applies defaults", () => {
-    expect(validateEnv({})).toEqual({
+    expect(validateEnv({})).toMatchObject({
       NODE_ENV: "development",
       PORT: 3333,
       DATABASE_URL: "postgres://finflow:finflow@localhost:5432/finflow",
       CORS_ORIGINS: ["http://localhost:3000"],
+      ACCESS_TOKEN_TTL_SECONDS: 900,
+      REFRESH_TOKEN_TTL_DAYS: 30,
     });
+  });
+
+  it("uses a development JWT secret only outside production", () => {
+    expect(validateEnv({}).JWT_SECRET.length).toBeGreaterThanOrEqual(32);
+    expect(() => validateEnv({ NODE_ENV: "production" })).toThrow(/JWT_SECRET is required/);
+    expect(() => validateEnv({ JWT_SECRET: "too-short" })).toThrow(/at least 32/);
+
+    const secret = "x".repeat(40);
+    expect(validateEnv({ NODE_ENV: "production", JWT_SECRET: secret }).JWT_SECRET).toBe(secret);
   });
 
   it("parses the port and a comma-separated origin list", () => {

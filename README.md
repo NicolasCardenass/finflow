@@ -60,6 +60,21 @@ transactions and budgets for the current month. Database integration tests run w
 TEST_DATABASE_URL=postgres://postgres@localhost:5432/postgres pnpm --filter @finflow/api test:e2e
 ```
 
+### Authentication
+
+| Method | Path                 | Description                                             |
+| ------ | -------------------- | ------------------------------------------------------- |
+| `POST` | `/api/auth/register` | Create an account and receive a token pair              |
+| `POST` | `/api/auth/login`    | Sign in with email and password                         |
+| `POST` | `/api/auth/refresh`  | Exchange a refresh token for a new pair (rotation)      |
+| `POST` | `/api/auth/logout`   | Revoke a refresh token                                  |
+| `GET`  | `/api/auth/me`       | Current user (requires `Authorization: Bearer <token>`) |
+
+Access tokens are short-lived JWTs (15 minutes by default). Refresh tokens are random opaque
+values stored only as SHA-256 hashes; each can be used once, and replaying a used one revokes
+all of the user's sessions. Passwords are hashed with bcrypt. Every route requires an access
+token unless it is explicitly marked as public.
+
 ### Data model
 
 ```mermaid

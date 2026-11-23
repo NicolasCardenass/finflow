@@ -3,7 +3,7 @@
 - [x] pnpm monorepo with shared TypeScript, ESLint and Prettier tooling
 - [x] NestJS API skeleton
 - [x] Database schema with Drizzle ORM (users, accounts, categories, transactions, budgets), migrations and seed
-- [ ] Authentication with JWT access/refresh tokens and bcrypt
+- [x] Authentication with JWT access/refresh tokens and bcrypt
 - [ ] Accounts CRUD
 - [ ] Categories CRUD
 - [ ] Transactions with filters and pagination
