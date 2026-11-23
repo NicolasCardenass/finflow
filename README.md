@@ -41,6 +41,13 @@ pnpm lint        # lint every package
 pnpm typecheck   # type-check every package
 ```
 
+### API
+
+```bash
+cp apps/api/.env.example apps/api/.env
+pnpm --filter @finflow/api dev   # http://localhost:3333/api/health
+```
+
 ## License
 
 [MIT](./LICENSE) © Nicolas Cardenas
