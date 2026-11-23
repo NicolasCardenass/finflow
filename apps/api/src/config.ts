@@ -4,6 +4,9 @@ import { z } from "zod";
 export const envSchema = z.object({
   NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
   PORT: z.coerce.number().int().min(1).max(65_535).default(3333),
+  DATABASE_URL: z
+    .url({ protocol: /^postgres(ql)?$/ })
+    .default("postgres://finflow:finflow@localhost:5432/finflow"),
   CORS_ORIGINS: z
     .string()
     .default("http://localhost:3000")

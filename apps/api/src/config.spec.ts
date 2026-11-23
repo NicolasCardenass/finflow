@@ -5,6 +5,7 @@ describe("validateEnv", () => {
     expect(validateEnv({})).toEqual({
       NODE_ENV: "development",
       PORT: 3333,
+      DATABASE_URL: "postgres://finflow:finflow@localhost:5432/finflow",
       CORS_ORIGINS: ["http://localhost:3000"],
     });
   });
@@ -19,5 +20,6 @@ describe("validateEnv", () => {
   it("rejects invalid values with a readable message", () => {
     expect(() => validateEnv({ PORT: "not-a-port" })).toThrow(/Invalid environment variables/);
     expect(() => validateEnv({ NODE_ENV: "staging" })).toThrow(/NODE_ENV/);
+    expect(() => validateEnv({ DATABASE_URL: "mysql://localhost/db" })).toThrow(/DATABASE_URL/);
   });
 });

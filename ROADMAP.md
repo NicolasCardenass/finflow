@@ -2,7 +2,7 @@
 
 - [x] pnpm monorepo with shared TypeScript, ESLint and Prettier tooling
 - [x] NestJS API skeleton
-- [ ] Prisma schema (users, accounts, categories, transactions, budgets), migrations and seed
+- [x] Database schema with Drizzle ORM (users, accounts, categories, transactions, budgets), migrations and seed
 - [ ] Authentication with JWT access/refresh tokens and bcrypt
 - [ ] Accounts CRUD
 - [ ] Categories CRUD
