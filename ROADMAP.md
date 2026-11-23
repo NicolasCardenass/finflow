@@ -4,7 +4,7 @@
 - [x] NestJS API skeleton
 - [x] Database schema with Drizzle ORM (users, accounts, categories, transactions, budgets), migrations and seed
 - [x] Authentication with JWT access/refresh tokens and bcrypt
-- [ ] Accounts CRUD
+- [x] Accounts CRUD
 - [ ] Categories CRUD
 - [ ] Transactions with filters and pagination
 - [ ] Budgets with limit alerts

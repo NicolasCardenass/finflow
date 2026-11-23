@@ -75,6 +75,19 @@ values stored only as SHA-256 hashes; each can be used once, and replaying a use
 all of the user's sessions. Passwords are hashed with bcrypt. Every route requires an access
 token unless it is explicitly marked as public.
 
+### Accounts
+
+| Method   | Path                | Description                                                           |
+| -------- | ------------------- | --------------------------------------------------------------------- |
+| `GET`    | `/api/accounts`     | List accounts with their current balance (`?includeArchived=true`)    |
+| `POST`   | `/api/accounts`     | Create an account (`name`, `type`, `currency`, `initialBalanceCents`) |
+| `GET`    | `/api/accounts/:id` | Get one account                                                       |
+| `PATCH`  | `/api/accounts/:id` | Rename, change type or initial balance, archive/unarchive             |
+| `DELETE` | `/api/accounts/:id` | Delete an account without transactions (others are archived)          |
+
+Balances are computed in the database from the initial balance and the account's transactions.
+Every query is scoped to the authenticated user; other users' resources answer `404`.
+
 ### Data model
 
 ```mermaid
