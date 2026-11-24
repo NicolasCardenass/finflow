@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { AccountsModule } from "./accounts/accounts.module.js";
 import { AuthModule } from "./auth/auth.module.js";
+import { BudgetsModule } from "./budgets/budgets.module.js";
 import { CategoriesModule } from "./categories/categories.module.js";
 import { validateEnv } from "./config.js";
 import { TransactionsModule } from "./transactions/transactions.module.js";
@@ -16,6 +17,7 @@ import { HealthController } from "./health/health.controller.js";
     AccountsModule,
     CategoriesModule,
     TransactionsModule,
+    BudgetsModule,
   ],
   controllers: [HealthController],
 })

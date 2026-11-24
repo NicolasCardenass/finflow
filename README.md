@@ -116,6 +116,19 @@ List query parameters: `page`, `pageSize` (max 100), `from` and `to` (`YYYY-MM-D
 `totalPages`. A transaction's category must match its kind, and archived accounts can't receive
 new transactions.
 
+### Budgets
+
+| Method   | Path                  | Description                                                                       |
+| -------- | --------------------- | --------------------------------------------------------------------------------- |
+| `GET`    | `/api/budgets`        | Budgets of `?month=YYYY-MM` (default: current) with spending                      |
+| `GET`    | `/api/budgets/alerts` | Budgets at 80% or more of their limit, worst first                                |
+| `POST`   | `/api/budgets`        | Set a monthly limit for an expense category (`categoryId`, `month`, `limitCents`) |
+| `PATCH`  | `/api/budgets/:id`    | Change the limit                                                                  |
+| `DELETE` | `/api/budgets/:id`    | Remove a budget                                                                   |
+
+Each budget reports `spentCents`, `remainingCents`, `usage` (e.g. `0.85`) and a `status` of `ok`,
+`warning` (80% or more) or `exceeded` (over 100%), computed from the month's expenses in one query.
+
 ### Data model
 
 ```mermaid
