@@ -6,7 +6,7 @@
 - [x] Authentication with JWT access/refresh tokens and bcrypt
 - [x] Accounts CRUD
 - [x] Categories CRUD
-- [ ] Transactions with filters and pagination
+- [x] Transactions with filters and pagination
 - [ ] Budgets with limit alerts
 - [ ] Reports: monthly summary and spending by category
 - [ ] OpenAPI (Swagger) documentation

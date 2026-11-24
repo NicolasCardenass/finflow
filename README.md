@@ -100,6 +100,22 @@ Every query is scoped to the authenticated user; other users' resources answer `
 
 New users start with a default set of income and expense categories.
 
+### Transactions
+
+| Method   | Path                    | Description                         |
+| -------- | ----------------------- | ----------------------------------- |
+| `GET`    | `/api/transactions`     | Paginated, filtered and sorted list |
+| `POST`   | `/api/transactions`     | Record an income or expense         |
+| `GET`    | `/api/transactions/:id` | Get one transaction                 |
+| `PATCH`  | `/api/transactions/:id` | Update any field                    |
+| `DELETE` | `/api/transactions/:id` | Delete a transaction                |
+
+List query parameters: `page`, `pageSize` (max 100), `from` and `to` (`YYYY-MM-DD`),
+`accountId`, `categoryId`, `kind`, `search` (description, case-insensitive) and `sort`
+(`date_desc`, `date_asc`, `amount_desc`, `amount_asc`). Responses include `total` and
+`totalPages`. A transaction's category must match its kind, and archived accounts can't receive
+new transactions.
+
 ### Data model
 
 ```mermaid
