@@ -1,16 +1,10 @@
 import type { AccountDto, CreateAccountInput, UpdateAccountInput } from "@finflow/shared";
 import { ConflictException, Inject, Injectable, NotFoundException } from "@nestjs/common";
 import { and, asc, eq, isNull, sql } from "drizzle-orm";
+import { isUniqueViolation } from "../common/db-errors.js";
 import type { Database } from "../database/client.js";
 import { DATABASE } from "../database/database.module.js";
 import { accounts, transactions } from "../database/schema.js";
-
-const UNIQUE_VIOLATION = "23505";
-
-function isUniqueViolation(error: unknown): boolean {
-  const cause = (error as { cause?: { code?: string } })?.cause ?? error;
-  return (cause as { code?: string })?.code === UNIQUE_VIOLATION;
-}
 
 /** Signed sum of an account's transactions, computed in the database. */
 const transactionsTotal = sql<string>`coalesce(sum(

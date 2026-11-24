@@ -5,7 +5,7 @@
 - [x] Database schema with Drizzle ORM (users, accounts, categories, transactions, budgets), migrations and seed
 - [x] Authentication with JWT access/refresh tokens and bcrypt
 - [x] Accounts CRUD
-- [ ] Categories CRUD
+- [x] Categories CRUD
 - [ ] Transactions with filters and pagination
 - [ ] Budgets with limit alerts
 - [ ] Reports: monthly summary and spending by category

@@ -11,6 +11,7 @@ import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import bcrypt from "bcryptjs";
 import { and, eq, isNull, sql } from "drizzle-orm";
+import { CategoriesService } from "../categories/categories.service.js";
 import type { Env } from "../config.js";
 import type { Database } from "../database/client.js";
 import { DATABASE } from "../database/database.module.js";
@@ -39,15 +40,20 @@ export class AuthService {
     @Inject(DATABASE) private readonly db: Database,
     private readonly jwt: JwtService,
     private readonly config: ConfigService<Env, true>,
+    private readonly categories: CategoriesService,
   ) {}
 
   async register(input: RegisterInput): Promise<AuthResponse> {
     const passwordHash = await bcrypt.hash(input.password, BCRYPT_ROUNDS);
-    const [user] = await this.db
-      .insert(users)
-      .values({ email: input.email, name: input.name, passwordHash })
-      .onConflictDoNothing()
-      .returning();
+    const user = await this.db.transaction(async (tx) => {
+      const [created] = await tx
+        .insert(users)
+        .values({ email: input.email, name: input.name, passwordHash })
+        .onConflictDoNothing()
+        .returning();
+      if (created) await this.categories.createDefaults(created.id, tx);
+      return created;
+    });
     if (!user) {
       throw new ConflictException("An account with this email already exists");
     }

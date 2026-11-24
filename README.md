@@ -88,6 +88,18 @@ token unless it is explicitly marked as public.
 Balances are computed in the database from the initial balance and the account's transactions.
 Every query is scoped to the authenticated user; other users' resources answer `404`.
 
+### Categories
+
+| Method   | Path                  | Description                                         |
+| -------- | --------------------- | --------------------------------------------------- |
+| `GET`    | `/api/categories`     | List categories (`?kind=income` or `?kind=expense`) |
+| `POST`   | `/api/categories`     | Create a category (`name`, `kind`, `color`)         |
+| `GET`    | `/api/categories/:id` | Get one category                                    |
+| `PATCH`  | `/api/categories/:id` | Rename or recolor (the kind is fixed)               |
+| `DELETE` | `/api/categories/:id` | Delete; its transactions become uncategorized       |
+
+New users start with a default set of income and expense categories.
+
 ### Data model
 
 ```mermaid
