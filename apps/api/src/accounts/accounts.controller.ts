@@ -22,12 +22,17 @@ import {
 import { CurrentUser, type AuthUser } from "../auth/current-user.decorator.js";
 import { ZodValidationPipe } from "../common/zod-validation.pipe.js";
 import { AccountsService } from "./accounts.service.js";
+import { ApiOperation, ApiQuery, ApiTags } from "@nestjs/swagger";
+import { ApiZodBody } from "../common/openapi.js";
 
+@ApiTags("Accounts")
 @Controller("accounts")
 export class AccountsController {
   constructor(private readonly accounts: AccountsService) {}
 
   @Get()
+  @ApiOperation({ summary: "List accounts with balances" })
+  @ApiQuery({ name: "includeArchived", required: false, type: Boolean })
   list(
     @CurrentUser() user: AuthUser,
     @Query("includeArchived", new ParseBoolPipe({ optional: true })) includeArchived?: boolean,
@@ -36,6 +41,8 @@ export class AccountsController {
   }
 
   @Post()
+  @ApiOperation({ summary: "Create an account" })
+  @ApiZodBody(createAccountSchema)
   create(
     @CurrentUser() user: AuthUser,
     @Body(new ZodValidationPipe(createAccountSchema)) body: CreateAccountInput,
@@ -44,6 +51,7 @@ export class AccountsController {
   }
 
   @Get(":id")
+  @ApiOperation({ summary: "Get an account" })
   get(
     @CurrentUser() user: AuthUser,
     @Param("id", new ParseUUIDPipe()) id: string,
@@ -52,6 +60,8 @@ export class AccountsController {
   }
 
   @Patch(":id")
+  @ApiOperation({ summary: "Update or archive an account" })
+  @ApiZodBody(updateAccountSchema)
   update(
     @CurrentUser() user: AuthUser,
     @Param("id", new ParseUUIDPipe()) id: string,
@@ -62,6 +72,7 @@ export class AccountsController {
 
   @Delete(":id")
   @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({ summary: "Delete an account without transactions" })
   remove(
     @CurrentUser() user: AuthUser,
     @Param("id", new ParseUUIDPipe()) id: string,

@@ -9,7 +9,7 @@
 - [x] Transactions with filters and pagination
 - [x] Budgets with limit alerts
 - [x] Reports: monthly summary and spending by category
-- [ ] OpenAPI (Swagger) documentation
+- [x] OpenAPI (Swagger) documentation
 - [ ] Unit and end-to-end tests
 - [ ] Web: scaffold and sign-in/sign-up pages
 - [ ] Web: dashboard with charts

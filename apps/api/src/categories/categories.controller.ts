@@ -24,12 +24,17 @@ import {
 import { CurrentUser, type AuthUser } from "../auth/current-user.decorator.js";
 import { ZodValidationPipe } from "../common/zod-validation.pipe.js";
 import { CategoriesService } from "./categories.service.js";
+import { ApiOperation, ApiQuery, ApiTags } from "@nestjs/swagger";
+import { ApiZodBody } from "../common/openapi.js";
 
+@ApiTags("Categories")
 @Controller("categories")
 export class CategoriesController {
   constructor(private readonly categories: CategoriesService) {}
 
   @Get()
+  @ApiOperation({ summary: "List categories" })
+  @ApiQuery({ name: "kind", required: false, enum: ENTRY_KINDS })
   list(
     @CurrentUser() user: AuthUser,
     @Query("kind", new ParseEnumPipe(ENTRY_KINDS, { optional: true })) kind?: EntryKind,
@@ -38,6 +43,8 @@ export class CategoriesController {
   }
 
   @Post()
+  @ApiOperation({ summary: "Create a category" })
+  @ApiZodBody(createCategorySchema)
   create(
     @CurrentUser() user: AuthUser,
     @Body(new ZodValidationPipe(createCategorySchema)) body: CreateCategoryInput,
@@ -46,6 +53,7 @@ export class CategoriesController {
   }
 
   @Get(":id")
+  @ApiOperation({ summary: "Get a category" })
   get(
     @CurrentUser() user: AuthUser,
     @Param("id", new ParseUUIDPipe()) id: string,
@@ -54,6 +62,8 @@ export class CategoriesController {
   }
 
   @Patch(":id")
+  @ApiOperation({ summary: "Rename or recolor a category" })
+  @ApiZodBody(updateCategorySchema)
   update(
     @CurrentUser() user: AuthUser,
     @Param("id", new ParseUUIDPipe()) id: string,
@@ -64,6 +74,7 @@ export class CategoriesController {
 
   @Delete(":id")
   @HttpCode(HttpStatus.NO_CONTENT)
+  @ApiOperation({ summary: "Delete a category (transactions become uncategorized)" })
   remove(
     @CurrentUser() user: AuthUser,
     @Param("id", new ParseUUIDPipe()) id: string,

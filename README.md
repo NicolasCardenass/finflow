@@ -60,6 +60,15 @@ transactions and budgets for the current month. Database integration tests run w
 TEST_DATABASE_URL=postgres://postgres@localhost:5432/postgres pnpm --filter @finflow/api test:e2e
 ```
 
+### API documentation
+
+With the API running, interactive Swagger UI is available at <http://localhost:3333/api/docs>
+and the OpenAPI 3.1 document at <http://localhost:3333/api/docs-json>. Request bodies and query
+parameters are generated from the same Zod schemas that validate requests, so the docs can't
+drift from the actual validation rules.
+
+![Swagger UI of the FinFlow API](./docs/swagger.png)
+
 ### Authentication
 
 | Method | Path                 | Description                                             |
