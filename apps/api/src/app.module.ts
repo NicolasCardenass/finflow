@@ -5,6 +5,7 @@ import { AuthModule } from "./auth/auth.module.js";
 import { BudgetsModule } from "./budgets/budgets.module.js";
 import { CategoriesModule } from "./categories/categories.module.js";
 import { validateEnv } from "./config.js";
+import { ReportsModule } from "./reports/reports.module.js";
 import { TransactionsModule } from "./transactions/transactions.module.js";
 import { DatabaseModule } from "./database/database.module.js";
 import { HealthController } from "./health/health.controller.js";
@@ -18,6 +19,7 @@ import { HealthController } from "./health/health.controller.js";
     CategoriesModule,
     TransactionsModule,
     BudgetsModule,
+    ReportsModule,
   ],
   controllers: [HealthController],
 })

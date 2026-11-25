@@ -129,6 +129,17 @@ new transactions.
 Each budget reports `spentCents`, `remainingCents`, `usage` (e.g. `0.85`) and a `status` of `ok`,
 `warning` (80% or more) or `exceeded` (over 100%), computed from the month's expenses in one query.
 
+### Reports
+
+| Method | Path                                                | Description                                                  |
+| ------ | --------------------------------------------------- | ------------------------------------------------------------ |
+| `GET`  | `/api/reports/monthly-summary?month=YYYY-MM`        | Income, expenses, net, savings rate and the previous month   |
+| `GET`  | `/api/reports/spending-by-category?from=&to=`       | Expenses per category with share of the total, largest first |
+| `GET`  | `/api/reports/monthly-trend?months=6&until=YYYY-MM` | Income, expenses and net per month, without gaps             |
+
+All aggregation happens in PostgreSQL (`SUM ... FILTER`, `GROUP BY`), so reports stay fast as data
+grows and never load individual transactions into the API.
+
 ### Data model
 
 ```mermaid

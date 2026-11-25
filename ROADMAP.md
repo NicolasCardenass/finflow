@@ -8,7 +8,7 @@
 - [x] Categories CRUD
 - [x] Transactions with filters and pagination
 - [x] Budgets with limit alerts
-- [ ] Reports: monthly summary and spending by category
+- [x] Reports: monthly summary and spending by category
 - [ ] OpenAPI (Swagger) documentation
 - [ ] Unit and end-to-end tests
 - [ ] Web: scaffold and sign-in/sign-up pages
