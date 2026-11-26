@@ -10,7 +10,7 @@
 - [x] Budgets with limit alerts
 - [x] Reports: monthly summary and spending by category
 - [x] OpenAPI (Swagger) documentation
-- [ ] Unit and end-to-end tests
+- [x] Unit and end-to-end tests
 - [ ] Web: scaffold and sign-in/sign-up pages
 - [ ] Web: dashboard with charts
 - [ ] Web: transactions and budgets pages

@@ -26,7 +26,7 @@ const SORTS = {
 } satisfies Record<ListTransactionsQuery["sort"], SQL[]>;
 
 /** Escape LIKE wildcards so user input is matched literally. */
-function escapeLike(value: string): string {
+export function escapeLike(value: string): string {
   return value.replace(/[\\%_]/g, (char) => `\\${char}`);
 }
 

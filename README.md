@@ -60,6 +60,16 @@ transactions and budgets for the current month. Database integration tests run w
 TEST_DATABASE_URL=postgres://postgres@localhost:5432/postgres pnpm --filter @finflow/api test:e2e
 ```
 
+### Testing
+
+- **Unit tests** (`pnpm --filter @finflow/api test`, `pnpm --filter @finflow/shared test`): pure
+  functions, validation schemas, the auth guard, the validation pipe and other helpers.
+- **End-to-end tests** (`pnpm --filter @finflow/api test:e2e`): the real NestJS app over HTTP
+  against a throwaway PostgreSQL database per test file, covering auth flows, business rules,
+  reports and isolation between users.
+- **Coverage** (`pnpm --filter @finflow/api test:coverage`): v8 coverage of the end-to-end suite,
+  enforced at 90% of statements, functions and lines and 80% of branches.
+
 ### API documentation
 
 With the API running, interactive Swagger UI is available at <http://localhost:3333/api/docs>
