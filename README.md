@@ -176,6 +176,42 @@ Schema changes are made in `apps/api/src/database/schema.ts`; `pnpm --filter @fi
 db:generate` writes a new SQL migration to `apps/api/drizzle/`. Constraints live in the database
 too: positive amounts, one budget per category and month, case-insensitive unique emails.
 
+## Web app
+
+`apps/web` is a Next.js 16 (App Router) client styled with Tailwind CSS. It talks to the API from
+the server only, as a small backend-for-frontend:
+
+- **Sign-in and sign-up** are Server Actions. They validate with the same zod schemas as the API
+  (`@finflow/shared`), so field errors match on both sides.
+- **Tokens never reach the browser's JavaScript.** The access and refresh tokens are stored in
+  `httpOnly`, `SameSite=Lax` cookies (`Secure` in production).
+- **Silent refresh:** when the access token is missing or rejected, the page redirects to
+  `/api/session/refresh`, which rotates the token pair and sends the user back where they were.
+- **Route protection** lives in `src/proxy.ts`: signed-out users are sent to `/login` and
+  signed-in users skip the auth pages.
+
+```mermaid
+sequenceDiagram
+    participant B as Browser
+    participant W as Next.js (web)
+    participant A as API
+    B->>W: POST sign-in form (Server Action)
+    W->>A: POST /api/auth/login
+    A-->>W: access + refresh tokens
+    W-->>B: httpOnly cookies, redirect /dashboard
+    B->>W: GET /dashboard
+    W->>A: GET /api/auth/me (Bearer token)
+    A-->>W: user
+    W-->>B: rendered page
+```
+
+```bash
+cp apps/web/.env.example apps/web/.env.local   # FINFLOW_API_URL=http://localhost:3333/api
+pnpm --filter @finflow/web dev                  # http://localhost:3000
+```
+
+![Sign-in page](docs/web-login.png)
+
 ## License
 
 [MIT](./LICENSE) © Nicolas Cardenas

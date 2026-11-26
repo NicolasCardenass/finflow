@@ -11,7 +11,7 @@
 - [x] Reports: monthly summary and spending by category
 - [x] OpenAPI (Swagger) documentation
 - [x] Unit and end-to-end tests
-- [ ] Web: scaffold and sign-in/sign-up pages
+- [x] Web: scaffold and sign-in/sign-up pages
 - [ ] Web: dashboard with charts
 - [ ] Web: transactions and budgets pages
 - [ ] Mobile (Expo): scaffold and sign-in
