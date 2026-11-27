@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "cp -r .next/static .next/standalone/apps/web/.next/ && node .next/standalone/apps/web/server.js",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "@finflow/shared": "workspace:*",
@@ -27,7 +28,8 @@
     "eslint-config-next": "16.4.6",
     "eslint-config-prettier": "^10.1.8",
     "tailwindcss": "4.3.3",
-    "typescript": "~6.0.0"
+    "typescript": "~6.0.0",
+    "vitest": "^5.1.1"
   },
   "description": "FinFlow web dashboard (Next.js)",
   "license": "MIT"
