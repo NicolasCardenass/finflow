@@ -210,7 +210,14 @@ cp apps/web/.env.example apps/web/.env.local   # FINFLOW_API_URL=http://localhos
 pnpm --filter @finflow/web dev                  # http://localhost:3000
 ```
 
-![Sign-in page](docs/web-login.png)
+The **dashboard** shows the selected month at a glance: income, expenses, net and savings rate
+compared with the previous month, a six-month income vs expenses chart, spending by category,
+budget progress and the latest transactions. Its five API calls run in parallel on the server, so
+the page arrives fully rendered.
+
+| Sign-in                             | Dashboard                            |
+| ----------------------------------- | ------------------------------------ |
+| ![Sign-in page](docs/web-login.png) | ![Dashboard](docs/web-dashboard.png) |
 
 ## License
 

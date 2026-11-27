@@ -12,7 +12,7 @@
 - [x] OpenAPI (Swagger) documentation
 - [x] Unit and end-to-end tests
 - [x] Web: scaffold and sign-in/sign-up pages
-- [ ] Web: dashboard with charts
+- [x] Web: dashboard with charts
 - [ ] Web: transactions and budgets pages
 - [ ] Mobile (Expo): scaffold and sign-in
 - [ ] Mobile: transaction list and creation
