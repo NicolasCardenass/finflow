@@ -4,7 +4,10 @@ import { logout } from "@/app/(auth)/actions";
 import { NavLink } from "@/components/nav-link";
 import { api } from "@/lib/api";
 
-const NAVIGATION = [{ href: "/dashboard", label: "Dashboard" }];
+const NAVIGATION = [
+  { href: "/dashboard", label: "Dashboard" },
+  { href: "/transactions", label: "Transactions" },
+];
 
 export default async function AppLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const user = await api<PublicUser>("/auth/me");
